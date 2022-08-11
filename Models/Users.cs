@@ -6,5 +6,7 @@ namespace WebService.Models {
         public String Email { get; set; }
         public String Username { get; set; }
         public String Password { get; set; }
+        public Address ShippingAddress { get; set; }
+        public Address BillingAddress { get; set; }
     }
 }
