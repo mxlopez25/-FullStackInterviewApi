@@ -8,5 +8,11 @@ namespace WebService.Models {
         public String Password { get; set; }
         public Address ShippingAddress { get; set; }
         public Address BillingAddress { get; set; }
+        public UserStatus Status { get; set; }
+    }
+
+    public enum UserStatus {
+        Active,
+        Inactive
     }
 }
