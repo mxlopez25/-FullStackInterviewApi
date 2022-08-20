@@ -1,35 +1,52 @@
+using Microsoft.EntityFrameworkCore;
+using WebService.Helpers;
 using WebService.Interfaces;
 using WebService.Models;
 
 namespace WebService.Services {
     public class UserService: IUserService {
-        public UserService() {
 
+        private readonly DataContext _dataContext;
+
+        public UserService(DataContext dataContext) {
+            _dataContext = dataContext;
         }
 
-        public Task<List<Users>> All()
+        public async Task<List<Users>?> All()
+        {
+            var users = await _dataContext.Users.ToListAsync();
+            return (users != null) ? users : null;
+        }
+
+        public async Task<Users?> Create(Users user)
+        {
+            user.CreatedDate = DateTime.Now;
+            user.Status = UserStatus.Active;
+            _dataContext.Users.Add(user);
+            await _dataContext.SaveChangesAsync();
+
+            return user;
+        }
+
+        public Task<bool?> Delete(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Users> Create(Users user)
+        public async Task<Users?> Get(int Id)
         {
-            throw new NotImplementedException();
+            var user = await _dataContext.Users.FindAsync(Id);
+            return (user != null) ? user : null;
         }
 
-        public Task<bool> Delete(int Id)
+        public async Task<Users?> Update(Users user)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Users> Get(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Users> Update(Users user)
-        {
-            throw new NotImplementedException();
+            var u = await _dataContext.Users.FindAsync(user.Id);
+            if (u != null) {
+                return u;
+            } else {
+                return user;
+            }
         }
     }
 }
