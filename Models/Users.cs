@@ -10,6 +10,10 @@ namespace WebService.Models {
         public Address? BillingAddress { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public UserStatus Status { get; set; }
+
+        public bool isValid() =>
+            !string.IsNullOrEmpty(FirstName)
+            && !string.IsNullOrEmpty(LastName);
     }
 
     public enum UserStatus {
