@@ -17,6 +17,13 @@ namespace WebService.Controllers {
             return (u != null) ? Ok(u) : NotFound("No users found.");
         }
 
+        [HttpGet("all")]
+        public async Task<IActionResult> All() {
+            var users = await _userService.All();
+
+            return Ok(users);
+        }
+
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody]Users user) {
             if(user.isValid()) {
