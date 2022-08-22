@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using WebService.Helpers;
 using WebService.Interfaces;
 using WebService.Models;
+using WebService.Models.Entities;
 
 namespace WebService.Services {
     public class UserService: IUserService {
@@ -12,20 +13,20 @@ namespace WebService.Services {
             _dataContext = dataContext;
         }
 
-        public async Task<List<Users>?> All()
+        public async Task<EUser?> All()
         {
-            var users = await _dataContext.Users.ToListAsync();
-            return (users != null) ? users : null;
+            var users = await _dataContext.Users.ToListAsync();            
+            return (users != null) ? new EUser(users) : null;
         }
 
-        public async Task<Users?> Create(Users user)
+        public async Task<EUser?> Create(Users user)
         {
             user.CreatedDate = DateTime.Now;
             user.Status = UserStatus.Active;
             _dataContext.Users.Add(user);
             await _dataContext.SaveChangesAsync();
-
-            return user;
+            
+            return new EUser(user);
         }
 
         public Task<bool?> Delete(int Id)
@@ -33,19 +34,19 @@ namespace WebService.Services {
             throw new NotImplementedException();
         }
 
-        public async Task<Users?> Get(int Id)
+        public async Task<EUser?> Get(int Id)
         {
             var user = await _dataContext.Users.FindAsync(Id);
-            return (user != null) ? user : null;
+            return (user != null) ? new EUser(user) : null;
         }
 
-        public async Task<Users?> Update(Users user)
+        public async Task<EUser?> Update(Users user)
         {
             var u = await _dataContext.Users.FindAsync(user.Id);
             if (u != null) {
-                return u;
+                return new EUser(u);
             } else {
-                return user;
+                return new EUser(user);
             }
         }
     }
