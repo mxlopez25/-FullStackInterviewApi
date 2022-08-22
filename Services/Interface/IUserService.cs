@@ -1,11 +1,12 @@
 using WebService.Models;
+using WebService.Models.Entities;
 
 namespace WebService.Interfaces {
     public interface IUserService {
-        Task<List<Users>?> All();
-        Task<Users?> Get(int Id);
-        Task<Users?> Create(Users user);
-        Task<Users?> Update(Users user);
+        Task<EUser?> All();
+        Task<EUser?> Get(int Id);
+        Task<EUser?> Create(Users user);
+        Task<EUser?> Update(Users user);
         Task<bool?> Delete(int Id);
     }
 }
