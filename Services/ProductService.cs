@@ -42,9 +42,11 @@ namespace WebService.Services {
             
         }
 
-        public Task<EProduct?> Update(Product product)
+        public async Task<bool> Update(Product product)
         {
-            throw new NotImplementedException();
+            _dataContext.Entry(await _dataContext.Products.FirstOrDefaultAsync(x => x.Id == product.Id))
+            .CurrentValues.SetValues(product);
+            return await _dataContext.SaveChangesAsync() > 0; 
         }
     }
 }

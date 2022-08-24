@@ -6,7 +6,7 @@ namespace WebService.Services.Interfaces {
         Task<EProduct?> Get(int Id);
         Task<EProduct?> All();
         Task<EProduct?> Create(Product product);
-        Task<EProduct?> Update(Product product);
-        Task<Boolean> Delete(int Id);
+        Task<bool> Update(Product product);
+        Task<bool> Delete(int Id);
     }
 }
