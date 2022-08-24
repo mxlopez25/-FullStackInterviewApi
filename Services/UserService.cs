@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebService.Helpers;
-using WebService.Interfaces;
+using WebService.Services.Interfaces;
 using WebService.Models;
 using WebService.Models.Entities;
 
