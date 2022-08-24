@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using WebService.Interfaces;
+using WebService.Services.Interfaces;
 using WebService.Models;
 
 namespace WebService.Controllers {
