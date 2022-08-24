@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebService.Helpers;
-using WebService.Interfaces;
 using WebService.Services;
+using WebService.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +17,7 @@ builder.Services.AddDbContext<DataContext>();
 
 // Add Services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
