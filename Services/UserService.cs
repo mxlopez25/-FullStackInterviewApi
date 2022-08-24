@@ -40,14 +40,10 @@ namespace WebService.Services {
             return (user != null) ? new EUser(user) : null;
         }
 
-        public async Task<EUser?> Update(Users user)
+        public async Task<bool?> Update(Users user)
         {
-            var u = await _dataContext.Users.FindAsync(user.Id);
-            if (u != null) {
-                return new EUser(u);
-            } else {
-                return new EUser(user);
-            }
+            _dataContext.Entry(await _dataContext.Users.FirstOrDefaultAsync(x => x.Id == user.Id)).CurrentValues.SetValues(user);
+            return await _dataContext.SaveChangesAsync() > 0;
         }
     }
 }

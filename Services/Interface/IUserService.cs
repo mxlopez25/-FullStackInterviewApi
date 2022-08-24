@@ -6,7 +6,7 @@ namespace WebService.Interfaces {
         Task<EUser?> All();
         Task<EUser?> Get(int Id);
         Task<EUser?> Create(Users user);
-        Task<EUser?> Update(Users user);
+        Task<bool?> Update(Users user);
         Task<bool?> Delete(int Id);
     }
 }
