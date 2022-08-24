@@ -11,6 +11,11 @@ namespace WebService.Controllers {
             _userService = userService;
         }
 
+        [HttpGet("status")]
+        public IActionResult Status(){
+            return Ok(new {message = "Server Running", date = DateTime.Today });
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id) {
             var u = await _userService.Get(id);
