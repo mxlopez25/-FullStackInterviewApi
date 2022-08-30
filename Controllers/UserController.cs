@@ -39,6 +39,7 @@ namespace WebService.Controllers {
             }
         }
 
+        [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody]Users user) {
             if(user.Id > 0) {
                 bool updated = (bool) await _userService.Update(user);
