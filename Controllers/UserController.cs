@@ -38,5 +38,18 @@ namespace WebService.Controllers {
                 return BadRequest(user);
             }
         }
+
+        public async Task<IActionResult> Update([FromBody]Users user) {
+            if(user.Id > 0) {
+                bool updated = (bool) await _userService.Update(user);
+                if(updated) {
+                    return Ok(await _userService.Get(user.Id));
+                } else {
+                    return BadRequest(await _userService.Get(user.Id));
+                }
+            } else {
+                return BadRequest(user);
+            }
+        }
     }
 }
